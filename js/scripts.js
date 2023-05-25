@@ -1,7 +1,10 @@
 const apiKey = "734fcc68751ee4f817e23a37f5e9a4cc";
+// const mapsApiKey = "AIzaSyCOMPui6Y9IQtKyKrd1dCCz2591Iq7J8AM";
 // const apiCountryURL = "https://countryflagsapi.com/png/";
 const apiCountryURL = "https://www.countryflagicons.com/SHINY/64/";
 const apiUnsplash = "https://source.unsplash.com/1600x900/?";
+// const mapsLocation = "https://maps.googleapis.com/maps/api/js?key="+mapsApiKey+"&libraries=places";
+
 
 const cityInput = document.querySelector("#city-input");
 const searchBtn = document.querySelector("#search");
@@ -69,7 +72,7 @@ const showWeatherData = async (city) => {
     "src",
     `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`
   );
-  console.log(data.sys.country);
+  
   countryElement.setAttribute("src", apiCountryURL + data.sys.country + '.png');
   umidityElement.innerText = `${data.main.humidity}%`;
   windElement.innerText = `${data.wind.speed}km/h`;
@@ -104,3 +107,11 @@ suggestionButtons.forEach((btn) => {
     showWeatherData(city);
   });
 });
+
+//  Maps Sugestion
+function initialize() {
+  var input = document.getElementById('city-input');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
